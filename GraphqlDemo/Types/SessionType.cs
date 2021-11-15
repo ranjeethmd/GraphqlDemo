@@ -33,8 +33,15 @@ namespace GraphqlDemo.Types
                 .Name("attendees");
 
             descriptor
+               .Field(t => t.SessionTags)
+               .ResolveWith<SessionResolvers>(t => t.GetTagsAsync(default!, default!, default!, default))
+               .UseDbContext<ApplicationDbContext>()
+               .Name("tags");
+
+            descriptor
                 .Field(t => t.Track)
-                .ResolveWith<SessionResolvers>(t => t.GetTrackAsync(default!, default!, default));
+                .ResolveWith<SessionResolvers>(t => t.GetTrackAsync(default!, default!, default))
+                .Name("track");
 
             descriptor
                 .Field(t => t.TrackId)
@@ -42,11 +49,8 @@ namespace GraphqlDemo.Types
 
             descriptor
                 .Field(t => t.Conference)
-                .ResolveWith<SessionResolvers>(t => t.GetConferenceAsync(default!, default!, default));
-
-            descriptor
-                .Field(t => t.ConferenceId)
-                .ID(nameof(Conference));
+                .ResolveWith<SessionResolvers>(t => t.GetConferenceAsync(default!, default!, default))
+                .Name("conference");           
         }
 
         private class SessionResolvers
@@ -100,6 +104,21 @@ namespace GraphqlDemo.Types
                 CancellationToken cancellationToken)
             {
                 return await conferenceById.LoadAsync(session.ConferenceId, cancellationToken);
+            }
+
+            public async Task<IEnumerable<Tag?>> GetTagsAsync(
+                Session session,
+                [ScopedService] ApplicationDbContext dbContext,
+                TagByIdDataLoader tagById,
+                CancellationToken cancellationToken)
+            {
+                var ids = await dbContext.Sessions
+                    .Where(s => s.Id == session.Id)
+                    .Include(session => session.SessionTags)
+                    .SelectMany(session => session.SessionTags.Select(t => t.TagId))
+                    .ToArrayAsync();
+
+                return await tagById.LoadAsync(ids, cancellationToken);
             }
         }
     }
