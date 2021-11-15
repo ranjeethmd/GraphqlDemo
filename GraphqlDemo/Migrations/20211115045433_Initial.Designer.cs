@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GraphqlDemo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211112005443_Refactoring")]
-    partial class Refactoring
+    [Migration("20211115045433_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,45 @@ namespace GraphqlDemo.Migrations
                     b.ToTable("Attendees");
                 });
 
+            modelBuilder.Entity("GraphqlDemo.Data.Conference", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Conferences");
+                });
+
+            modelBuilder.Entity("GraphqlDemo.Data.ConferenceAttendee", b =>
+                {
+                    b.Property<int>("ConfrenceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AttendeeID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ConferenceId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ConfrenceId", "AttendeeID");
+
+                    b.HasIndex("AttendeeID");
+
+                    b.HasIndex("ConferenceId");
+
+                    b.ToTable("ConferenceAttendee");
+                });
+
             modelBuilder.Entity("GraphqlDemo.Data.Session", b =>
                 {
                     b.Property<int>("Id")
@@ -60,6 +99,9 @@ namespace GraphqlDemo.Migrations
                     b.Property<string>("Abstract")
                         .HasMaxLength(4000)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("ConferenceId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("EndTime")
                         .HasColumnType("TEXT");
@@ -76,6 +118,8 @@ namespace GraphqlDemo.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ConferenceId");
 
                     b.HasIndex("TrackId");
 
@@ -112,6 +156,21 @@ namespace GraphqlDemo.Migrations
                     b.ToTable("SessionSpeaker");
                 });
 
+            modelBuilder.Entity("GraphqlDemo.Data.SessionTag", b =>
+                {
+                    b.Property<int>("SessionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("SessionId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("SessionTag");
+                });
+
             modelBuilder.Entity("GraphqlDemo.Data.Speaker", b =>
                 {
                     b.Property<int>("Id")
@@ -121,6 +180,9 @@ namespace GraphqlDemo.Migrations
                     b.Property<string>("Bio")
                         .HasMaxLength(4000)
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("ConferenceId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -133,13 +195,36 @@ namespace GraphqlDemo.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ConferenceId");
+
                     b.ToTable("Speakers");
+                });
+
+            modelBuilder.Entity("GraphqlDemo.Data.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("GraphqlDemo.Data.Track", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ConferenceId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -149,14 +234,41 @@ namespace GraphqlDemo.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ConferenceId");
+
                     b.ToTable("Tracks");
+                });
+
+            modelBuilder.Entity("GraphqlDemo.Data.ConferenceAttendee", b =>
+                {
+                    b.HasOne("GraphqlDemo.Data.Attendee", "Attendee")
+                        .WithMany("ConferenceAttendees")
+                        .HasForeignKey("AttendeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GraphqlDemo.Data.Conference", "Conference")
+                        .WithMany("ConferenceAttendees")
+                        .HasForeignKey("ConferenceId");
+
+                    b.Navigation("Attendee");
+
+                    b.Navigation("Conference");
                 });
 
             modelBuilder.Entity("GraphqlDemo.Data.Session", b =>
                 {
+                    b.HasOne("GraphqlDemo.Data.Conference", "Conference")
+                        .WithMany("Sessions")
+                        .HasForeignKey("ConferenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("GraphqlDemo.Data.Track", "Track")
                         .WithMany("Sessions")
                         .HasForeignKey("TrackId");
+
+                    b.Navigation("Conference");
 
                     b.Navigation("Track");
                 });
@@ -199,9 +311,57 @@ namespace GraphqlDemo.Migrations
                     b.Navigation("Speaker");
                 });
 
+            modelBuilder.Entity("GraphqlDemo.Data.SessionTag", b =>
+                {
+                    b.HasOne("GraphqlDemo.Data.Session", null)
+                        .WithMany("SessionTags")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GraphqlDemo.Data.Tag", null)
+                        .WithMany("SessionTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GraphqlDemo.Data.Speaker", b =>
+                {
+                    b.HasOne("GraphqlDemo.Data.Conference", "Confrence")
+                        .WithMany("Speakers")
+                        .HasForeignKey("ConferenceId");
+
+                    b.Navigation("Confrence");
+                });
+
+            modelBuilder.Entity("GraphqlDemo.Data.Track", b =>
+                {
+                    b.HasOne("GraphqlDemo.Data.Conference", "Conference")
+                        .WithMany("Tracks")
+                        .HasForeignKey("ConferenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conference");
+                });
+
             modelBuilder.Entity("GraphqlDemo.Data.Attendee", b =>
                 {
+                    b.Navigation("ConferenceAttendees");
+
                     b.Navigation("SessionsAttendees");
+                });
+
+            modelBuilder.Entity("GraphqlDemo.Data.Conference", b =>
+                {
+                    b.Navigation("ConferenceAttendees");
+
+                    b.Navigation("Sessions");
+
+                    b.Navigation("Speakers");
+
+                    b.Navigation("Tracks");
                 });
 
             modelBuilder.Entity("GraphqlDemo.Data.Session", b =>
@@ -209,11 +369,18 @@ namespace GraphqlDemo.Migrations
                     b.Navigation("SessionAttendees");
 
                     b.Navigation("SessionSpeakers");
+
+                    b.Navigation("SessionTags");
                 });
 
             modelBuilder.Entity("GraphqlDemo.Data.Speaker", b =>
                 {
                     b.Navigation("SessionSpeakers");
+                });
+
+            modelBuilder.Entity("GraphqlDemo.Data.Tag", b =>
+                {
+                    b.Navigation("SessionTags");
                 });
 
             modelBuilder.Entity("GraphqlDemo.Data.Track", b =>
