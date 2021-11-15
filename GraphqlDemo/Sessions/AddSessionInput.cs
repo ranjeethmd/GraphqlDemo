@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 namespace GraphqlDemo.Sessions
 {
-    public record AddSessionInput(
-       string Title,
-       string? Abstract,
-       [ID(nameof(Speaker))]
-       IReadOnlyList<int> SpeakerIds);
+    public class AddSessionInput
+    {
+        public string Title { get; set; } = default!;
+        public string? Abstract { get; set; }
+        [ID(nameof(Speaker))]
+        public IReadOnlyList<int> SpeakerIds { get; set; } = default!;
+    }
 }

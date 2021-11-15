@@ -3,8 +3,12 @@ using HotChocolate.Types.Relay;
 
 namespace GraphqlDemo.Tracks
 {
-    public record AddTrackInput(
+
+    public class AddTrackInput
+    {
         [ID(nameof(Conference))]
-        int ConfrenceId,
-        string Name);
+        public int ConfrenceId { get; set; }
+        public string Name { get; set; } = default!;
+
+    }
 }

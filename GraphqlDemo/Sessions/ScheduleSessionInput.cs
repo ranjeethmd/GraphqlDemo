@@ -4,13 +4,15 @@ using System;
 
 namespace GraphqlDemo.Sessions
 {
-    public record ScheduleSessionInput(
+    public record ScheduleSessionInput
+    {
         [ID(nameof(Session))]
-        int SessionId,
+        public int SessionId{get; set;} = default!;
         [ID(nameof(Track))]
-        int TrackId,
+        public int TrackId { get; set; } = default!;
         [ID(nameof(Conference))]
-        int ConferenceId,
-        DateTimeOffset StartTime,
-        DateTimeOffset EndTime);
+        public int ConferenceId { get; set; } = default!;
+        public DateTimeOffset StartTime { get; set; } = default!;
+        public DateTimeOffset EndTime { get; set; } = default!;
+    }
 }

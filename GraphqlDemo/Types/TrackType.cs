@@ -29,7 +29,8 @@ namespace GraphqlDemo.Types
 
             descriptor
                 .Field(t => t.Conference)
-                .ResolveWith<TrackResolvers>(t => t.GetConferenceAsync(default!, default!, default));
+                .ResolveWith<TrackResolvers>(t => t.GetConferenceAsync(default!, default!, default))
+                .Name("conference");
 
             descriptor
                 .Field(t => t.ConferenceId)

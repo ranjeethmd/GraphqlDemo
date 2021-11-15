@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace GraphqlDemo.Attendees
 {
-    public record RegisterAttendeeInput
-    (
+    public class RegisterAttendeeInput
+    {
         [ID(nameof(Attendee))]
-        int AttendeeId,
+        public int AttendeeId { get; set; } = default!;
         [ID(nameof(Conference))]
-        int ConferenceId,
+        public int ConferenceId { get; set; } = default!;
         [ID(nameof(Session))]
-        IReadOnlyList<int> SessionIds
-    );
+        public IReadOnlyList<int> SessionIds { get; set; } = default!;
+    }
 }

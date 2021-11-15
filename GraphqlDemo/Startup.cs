@@ -34,13 +34,14 @@ namespace GraphqlDemo
                     .AddTypeExtension<TrackMutations>()
                     .AddTypeExtension<ConferenceMutations>()
                     .AddTypeExtension<TagMutations>()
-                    .AddTypeExtension<AttendeeMutations>()
+                    .AddTypeExtension<AttendeeMutations>()               
                 .AddType<AttendeeType>()
                 .AddType<SessionType>()
                 .AddType<SpeakerType>()
                 .AddType<TrackType>()
                 .AddType<ConferenceType>()
                 .AddType<TagType>();
+                
 
 
 
