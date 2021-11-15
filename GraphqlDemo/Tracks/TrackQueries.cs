@@ -16,7 +16,7 @@ namespace GraphqlDemo.Tracks
     [ExtendObjectType("Query")]
     public class TrackQueries
     {
-        //[UseApplicationDbContext]
+        [UseApplicationDbContext]
         //[UseApplicationDbContext]
         //[UsePaging]
         //public IQueryable<Track> GetTracks(
