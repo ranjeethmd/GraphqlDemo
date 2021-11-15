@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GraphqlDemo.Speakers
 {
-    public class SpeakerPayloadBase: Payload
+    public class SpeakerPayloadBase : Payload
     {
         protected SpeakerPayloadBase(Speaker speaker)
         {

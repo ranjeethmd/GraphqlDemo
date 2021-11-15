@@ -3,9 +3,6 @@ using GraphqlDemo.Extensions;
 using GraphqlDemo.Records;
 using HotChocolate;
 using HotChocolate.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,13 +33,13 @@ namespace GraphqlDemo
         public async Task<AddSpeakerPayload> AlterSpeakerAsync(
             AlterSpeakerInput input,
             [ScopedService] ApplicationDbContext context
-            ,CancellationToken cancellationToken)
-        {           
+            , CancellationToken cancellationToken)
+        {
 
-            var speaker= await context.Speakers.FindAsync(input.Id);
+            var speaker = await context.Speakers.FindAsync(input.Id);
 
 
-            
+
             await context.SaveChangesAsync(cancellationToken);
 
             return new AddSpeakerPayload(speaker);

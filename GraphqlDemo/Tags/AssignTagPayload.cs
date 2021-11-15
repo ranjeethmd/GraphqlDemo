@@ -4,19 +4,19 @@ using System.Collections.Generic;
 
 namespace GraphqlDemo.Tags
 {
-    public class CreateTagPayload : TagPayloadBase
+    public class AssignTagPayload : TagPayloadBase
     {
-        public CreateTagPayload(Tag payload)
+        public AssignTagPayload(Tag payload)
             : base(payload)
         {
         }
 
-        public CreateTagPayload(IReadOnlyList<UserError> errors)
+        public AssignTagPayload(IReadOnlyList<UserError> errors)
             : base(errors)
         {
         }
 
-        public CreateTagPayload(UserError errors)
+        public AssignTagPayload(UserError errors)
             : this(new[] { errors })
         {
         }

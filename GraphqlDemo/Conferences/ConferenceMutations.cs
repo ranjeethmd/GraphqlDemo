@@ -3,19 +3,16 @@ using GraphqlDemo.Data;
 using GraphqlDemo.Extensions;
 using HotChocolate;
 using HotChocolate.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace GraphqlDemo.Conferences
 {
     [ExtendObjectType("Mutation")]
-    public class ConferenceMutation
+    public class ConferenceMutations
     {
         [UseApplicationDbContext]
-        public async Task<CreateConferencePayload> AddSessionAsync(
+        public async Task<CreateConferencePayload> CreateConferenceAsync(
            CreateConferenceInput input,
            [ScopedService] ApplicationDbContext context,
            CancellationToken cancellationToken)
@@ -29,8 +26,8 @@ namespace GraphqlDemo.Conferences
 
             var conference = new Conference
             {
-                Name=input.Name
-            };           
+                Name = input.Name
+            };
 
             context.Conferences.Add(conference);
             await context.SaveChangesAsync(cancellationToken);

@@ -3,9 +3,6 @@ using GraphqlDemo.Data;
 using GraphqlDemo.Extensions;
 using HotChocolate;
 using HotChocolate.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -65,7 +62,7 @@ namespace GraphqlDemo.Sessions
             }
 
             Session session = await context.Sessions.FindAsync(input.SessionId);
-            int? initialTrackId = session.TrackId;
+
 
             if (session is null)
             {
@@ -76,6 +73,7 @@ namespace GraphqlDemo.Sessions
             session.TrackId = input.TrackId;
             session.StartTime = input.StartTime;
             session.EndTime = input.EndTime;
+            session.ConferenceId = input.ConferenceId;
 
             await context.SaveChangesAsync();
 

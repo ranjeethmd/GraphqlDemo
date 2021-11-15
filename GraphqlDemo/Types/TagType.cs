@@ -4,7 +4,6 @@ using GraphqlDemo.Extensions;
 using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -45,5 +44,5 @@ namespace GraphqlDemo.Types
                 return await sessionById.LoadAsync(sessionIds, cancellationToken);
             }
         }
-    }    
+    }
 }

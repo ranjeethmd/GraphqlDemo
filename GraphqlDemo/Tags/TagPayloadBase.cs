@@ -1,14 +1,12 @@
 ﻿using GraphqlDemo.Common;
-using System;
+using GraphqlDemo.Data;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GraphqlDemo.Tags
 {
     public class TagPayloadBase : Payload
     {
-        protected TagPayloadBase(Payload payload)
+        protected TagPayloadBase(Tag payload)
         {
             Payload = payload;
         }
@@ -16,6 +14,6 @@ namespace GraphqlDemo.Tags
         {
         }
 
-        public Payload? Payload { get; }
+        public Tag? Payload { get; }
     }
 }

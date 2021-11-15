@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GraphqlDemo.Data
 {
@@ -27,5 +24,8 @@ namespace GraphqlDemo.Data
 
         public ICollection<SessionAttendee> SessionsAttendees { get; set; } =
             new List<SessionAttendee>();
+
+        public ICollection<ConferenceAttendee> ConferenceAttendees { get; set; } =
+            new List<ConferenceAttendee>();
     }
 }

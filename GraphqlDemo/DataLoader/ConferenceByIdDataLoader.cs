@@ -1,6 +1,5 @@
 ﻿using GraphqlDemo.Data;
 using GreenDonut;
-using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace GraphqlDemo.DataLoader
                 throw new ArgumentNullException(nameof(dbContextFactory));
         }
         protected override async Task<IReadOnlyDictionary<int, Conference>> LoadBatchAsync(
-            IReadOnlyList<int> keys, 
+            IReadOnlyList<int> keys,
             CancellationToken cancellationToken)
         {
             await using ApplicationDbContext dbContext =

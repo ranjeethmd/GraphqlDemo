@@ -16,20 +16,20 @@ namespace GraphqlDemo.Tracks
     [ExtendObjectType("Query")]
     public class TrackQueries
     {
-        [UseApplicationDbContext]
-        [UseApplicationDbContext]
-        [UsePaging]
-        public IQueryable<Track> GetTracks(
-        [ScopedService] ApplicationDbContext context) =>
-        context.Tracks.OrderBy(t => t.Name);
+        //[UseApplicationDbContext]
+        //[UseApplicationDbContext]
+        //[UsePaging]
+        //public IQueryable<Track> GetTracks(
+        //[ScopedService] ApplicationDbContext context) =>
+        //context.Tracks.OrderBy(t => t.Name);
 
-        /*
-         public async Task<IEnumerable<Track>> GetTracksAsync(
-            [ScopedService] ApplicationDbContext context,
-            CancellationToken cancellationToken) =>
-            await context.Tracks.ToListAsync(cancellationToken);       
-         
-         */
+
+        public async Task<IEnumerable<Track>> GetTracksAsync(
+           [ScopedService] ApplicationDbContext context,
+           CancellationToken cancellationToken) =>
+           await context.Tracks.ToListAsync(cancellationToken);
+
+
 
         [UseApplicationDbContext]
         public Task<Track> GetTrackByNameAsync(
@@ -41,8 +41,8 @@ namespace GraphqlDemo.Tracks
         [UseApplicationDbContext]
         public async Task<IEnumerable<Track>> GetTrackByNamesAsync(
             string[] names,
-            [ScopedService] ApplicationDbContext context,
-            CancellationToken cancellationToken) =>
+            [ScopedService] ApplicationDbContext context
+            ) =>
             await context.Tracks.Where(t => names.Contains(t.Name)).ToListAsync();
 
         public Task<Track> GetTrackByIdAsync(

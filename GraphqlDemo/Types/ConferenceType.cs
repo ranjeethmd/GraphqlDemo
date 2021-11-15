@@ -4,7 +4,6 @@ using GraphqlDemo.Extensions;
 using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GraphqlDemo.Types
 {
-    public class ConferenceType: ObjectType<Conference>
+    public class ConferenceType : ObjectType<Conference>
     {
         protected override void Configure(IObjectTypeDescriptor<Conference> descriptor)
         {
@@ -55,7 +54,7 @@ namespace GraphqlDemo.Types
                 CancellationToken cancellationToken)
             {
                 int[] sessionIds = await dbContext.Conferences
-                    .Where(c => c.Id == confrence.Id)                    
+                    .Where(c => c.Id == confrence.Id)
                     .SelectMany(s => s.Sessions.Select(t => t.Id))
                     .ToArrayAsync();
 

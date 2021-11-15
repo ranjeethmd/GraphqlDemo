@@ -1,9 +1,6 @@
 ﻿using GraphqlDemo.Data;
 using HotChocolate.Types.Relay;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GraphqlDemo.Sessions
 {
@@ -12,6 +9,8 @@ namespace GraphqlDemo.Sessions
         int SessionId,
         [ID(nameof(Track))]
         int TrackId,
+        [ID(nameof(Conference))]
+        int ConferenceId,
         DateTimeOffset StartTime,
         DateTimeOffset EndTime);
 }

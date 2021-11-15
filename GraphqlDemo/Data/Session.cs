@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GraphqlDemo.Data
 {
@@ -28,15 +26,19 @@ namespace GraphqlDemo.Data
 
         public int? TrackId { get; set; }
 
+        public int ConferenceId { get; set; }
+
         public ICollection<SessionSpeaker> SessionSpeakers { get; set; } =
             new List<SessionSpeaker>();
 
         public ICollection<SessionAttendee> SessionAttendees { get; set; } =
             new List<SessionAttendee>();
 
-        public ICollection<SessionTag> SessionTags { get; set; } = 
+        public ICollection<SessionTag> SessionTags { get; set; } =
             new List<SessionTag>();
 
         public Track? Track { get; set; }
+
+        public Conference? Conference { get; set; }
     }
 }

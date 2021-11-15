@@ -1,4 +1,10 @@
-﻿namespace GraphqlDemo.Tracks
+﻿using GraphqlDemo.Data;
+using HotChocolate.Types.Relay;
+
+namespace GraphqlDemo.Tracks
 {
-    public record AddTrackInput(string Name);
+    public record AddTrackInput(
+        [ID(nameof(Conference))]
+        int ConfrenceId,
+        string Name);
 }

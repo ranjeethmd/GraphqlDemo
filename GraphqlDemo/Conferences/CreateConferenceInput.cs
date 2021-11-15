@@ -1,10 +1,6 @@
-﻿using GraphqlDemo.Data;
-using HotChocolate.Types.Relay;
-
-
-namespace GraphqlDemo.Conferences
+﻿namespace GraphqlDemo.Conferences
 {
-    public record CreateConferenceInput(       
+    public record CreateConferenceInput(
         string Name
     );
 }

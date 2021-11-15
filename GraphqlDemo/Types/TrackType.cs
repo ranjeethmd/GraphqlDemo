@@ -4,7 +4,6 @@ using GraphqlDemo.Extensions;
 using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -27,6 +26,15 @@ namespace GraphqlDemo.Types
                 .ResolveWith<TrackResolvers>(t => t.GetSessionsAsync(default!, default!, default!, default))
                 .UseDbContext<ApplicationDbContext>()
                 .Name("sessions");
+
+            descriptor
+                .Field(t => t.Conference)
+                .ResolveWith<TrackResolvers>(t => t.GetConferenceAsync(default!, default!, default));
+
+            descriptor
+                .Field(t => t.ConferenceId)
+                .ID(nameof(Conference));
+
         }
 
         private class TrackResolvers
@@ -43,6 +51,14 @@ namespace GraphqlDemo.Types
                     .ToArrayAsync();
 
                 return await sessionById.LoadAsync(sessionIds, cancellationToken);
+            }
+
+            public async Task<Conference?> GetConferenceAsync(
+                Track track,
+                ConferenceByIdDataLoader conferenceById,
+                CancellationToken cancellationToken)
+            {
+                return await conferenceById.LoadAsync(track.ConferenceId, cancellationToken);
             }
         }
     }

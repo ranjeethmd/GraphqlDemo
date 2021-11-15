@@ -4,7 +4,6 @@ using GraphqlDemo.Extensions;
 using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -26,6 +25,12 @@ namespace GraphqlDemo.Types
                 .ResolveWith<AttendeeResolvers>(t => t.GetSessionsAsync(default!, default!, default!, default))
                 .UseDbContext<ApplicationDbContext>()
                 .Name("sessions");
+
+            descriptor
+                .Field(t => t.ConferenceAttendees)
+                .ResolveWith<AttendeeResolvers>(t => t.GetConfrencesAsync(default!, default!, default!, default))
+                .UseDbContext<ApplicationDbContext>()
+                .Name("conferences");
         }
 
         private class AttendeeResolvers
@@ -43,6 +48,20 @@ namespace GraphqlDemo.Types
                     .ToArrayAsync();
 
                 return await sessionById.LoadAsync(speakerIds, cancellationToken);
+            }
+            public async Task<IEnumerable<Conference>> GetConfrencesAsync(
+               Attendee attendee,
+               [ScopedService] ApplicationDbContext dbContext,
+               ConferenceByIdDataLoader conferenceById,
+               CancellationToken cancellationToken)
+            {
+                int[] conferenceIds = await dbContext.Attendees
+                    .Where(a => a.Id == attendee.Id)
+                    .Include(a => a.ConferenceAttendees)
+                    .SelectMany(a => a.ConferenceAttendees.Select(t => t.ConfrenceId))
+                    .ToArrayAsync();
+
+                return await conferenceById.LoadAsync(conferenceIds, cancellationToken);
             }
         }
     }

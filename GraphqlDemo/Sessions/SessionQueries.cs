@@ -5,7 +5,6 @@ using HotChocolate;
 using HotChocolate.Types;
 using HotChocolate.Types.Relay;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -32,6 +31,6 @@ namespace GraphqlDemo.Sessions
             [ID(nameof(Session))] int[] ids,
             SessionByIdDataLoader sessionById,
             CancellationToken cancellationToken) =>
-            await sessionById.LoadAsync(ids, cancellationToken);
+            await sessionById.LoadAsync(ids, cancellationToken);       
     }
 }

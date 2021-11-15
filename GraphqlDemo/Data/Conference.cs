@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GraphqlDemo.Data
 {
@@ -14,7 +11,7 @@ namespace GraphqlDemo.Data
         [StringLength(200)]
         public string Name { get; set; } = default!;
         public ICollection<Session> Sessions { get; set; } = new List<Session>();
-          
+
         public ICollection<Track> Tracks { get; set; } = new List<Track>();
 
 

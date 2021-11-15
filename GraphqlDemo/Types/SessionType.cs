@@ -4,7 +4,6 @@ using GraphqlDemo.Extensions;
 using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -40,6 +39,14 @@ namespace GraphqlDemo.Types
             descriptor
                 .Field(t => t.TrackId)
                 .ID(nameof(Track));
+
+            descriptor
+                .Field(t => t.Conference)
+                .ResolveWith<SessionResolvers>(t => t.GetConferenceAsync(default!, default!, default));
+
+            descriptor
+                .Field(t => t.ConferenceId)
+                .ID(nameof(Conference));
         }
 
         private class SessionResolvers
@@ -85,6 +92,14 @@ namespace GraphqlDemo.Types
                 }
 
                 return await trackById.LoadAsync(session.TrackId.Value, cancellationToken);
+            }
+
+            public async Task<Conference?> GetConferenceAsync(
+                Session session,
+                ConferenceByIdDataLoader conferenceById,
+                CancellationToken cancellationToken)
+            {
+                return await conferenceById.LoadAsync(session.ConferenceId, cancellationToken);
             }
         }
     }

@@ -37,6 +37,7 @@ namespace GraphqlDemo
                 .Entity<SessionSpeaker>()
                 .HasKey(ss => new { ss.SessionId, ss.SpeakerId });
 
+            // Many-to-many: Session <-> Tag
             modelBuilder
                 .Entity<SessionTag>()
                 .HasKey(st => new { st.SessionId, st.TagId });

@@ -2,9 +2,6 @@
 using GraphqlDemo.Extensions;
 using HotChocolate;
 using HotChocolate.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,7 +16,12 @@ namespace GraphqlDemo.Tracks
             [ScopedService] ApplicationDbContext context,
             CancellationToken cancellationToken)
         {
-            var track = new Track { Name = input.Name };
+            var track = new Track
+            {
+                ConferenceId = input.ConfrenceId,
+                Name = input.Name
+            };
+
             context.Tracks.Add(track);
 
             await context.SaveChangesAsync(cancellationToken);
@@ -33,12 +35,12 @@ namespace GraphqlDemo.Tracks
         [ScopedService] ApplicationDbContext context,
         CancellationToken cancellationToken)
         {
-                Track track = await context.Tracks.FindAsync(input.Id);
-                track.Name = input.Name;
+            Track track = await context.Tracks.FindAsync(input.Id);
+            track.Name = input.Name;
 
-                await context.SaveChangesAsync(cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
 
-                return new RenameTrackPayload(track);
+            return new RenameTrackPayload(track);
         }
     }
 }

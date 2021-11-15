@@ -1,17 +1,14 @@
-using GraphqlDemo.DataLoader;
+using GraphqlDemo.Attendees;
+using GraphqlDemo.Conferences;
 using GraphqlDemo.Sessions;
+using GraphqlDemo.Tags;
 using GraphqlDemo.Tracks;
 using GraphqlDemo.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GraphqlDemo
 {
@@ -28,14 +25,22 @@ namespace GraphqlDemo
                 .AddTypeExtension<SessionQueries>()
                 .AddTypeExtension<SpeakerQueries>()
                 .AddTypeExtension<TrackQueries>()
+                .AddTypeExtension<ConferenceQueries>()
+                .AddTypeExtension<TagQueries>()
+                .AddTypeExtension<AttendeeQueries>()
                 .AddMutationType(d => d.Name("Mutation"))
                     .AddTypeExtension<SessionMutations>()
                     .AddTypeExtension<SpeakerMutations>()
-                    .AddTypeExtension<TrackMutations>()    
+                    .AddTypeExtension<TrackMutations>()
+                    .AddTypeExtension<ConferenceMutations>()
+                    .AddTypeExtension<TagMutations>()
+                    .AddTypeExtension<AttendeeMutations>()
                 .AddType<AttendeeType>()
                 .AddType<SessionType>()
                 .AddType<SpeakerType>()
-                .AddType<TrackType>();
+                .AddType<TrackType>()
+                .AddType<ConferenceType>()
+                .AddType<TagType>();
 
 
 
