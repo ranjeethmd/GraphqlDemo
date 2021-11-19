@@ -2,6 +2,9 @@
 
 This repository contains demo code for GraphQL implementation in .NET Core.
 
+[Mutations Example](docs/mutations.md)  
+[Queries Example](docs/queries.md)
+
 ## TODO ::
 
 - [x] Build basic Graphql application to perform
