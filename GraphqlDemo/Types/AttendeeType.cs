@@ -36,7 +36,7 @@ namespace GraphqlDemo.Types
         private class AttendeeResolvers
         {
             public async Task<IEnumerable<Session>> GetSessionsAsync(
-                Attendee attendee,
+                [Parent] Attendee attendee,
                 [ScopedService] ApplicationDbContext dbContext,
                 SessionByIdDataLoader sessionById,
                 CancellationToken cancellationToken)
@@ -50,7 +50,7 @@ namespace GraphqlDemo.Types
                 return await sessionById.LoadAsync(speakerIds, cancellationToken);
             }
             public async Task<IEnumerable<Conference>> GetConfrencesAsync(
-               Attendee attendee,
+               [Parent] Attendee attendee,
                [ScopedService] ApplicationDbContext dbContext,
                ConferenceByIdDataLoader conferenceById,
                CancellationToken cancellationToken)

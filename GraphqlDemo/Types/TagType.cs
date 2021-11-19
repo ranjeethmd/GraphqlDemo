@@ -30,7 +30,7 @@ namespace GraphqlDemo.Types
         private class TagResolvers
         {
             public async Task<IEnumerable<Session?>?> GetSessionsAsync(
-                Tag tag,
+                [Parent] Tag tag,
                 [ScopedService] ApplicationDbContext dbContext,
                 SessionByIdDataLoader sessionById,
                 CancellationToken cancellationToken)

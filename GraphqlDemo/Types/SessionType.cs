@@ -56,7 +56,7 @@ namespace GraphqlDemo.Types
         private class SessionResolvers
         {
             public async Task<IEnumerable<Speaker>> GetSpeakersAsync(
-                Session session,
+                [Parent] Session session,
                 [ScopedService] ApplicationDbContext dbContext,
                 SpeakerByIdDataLoader speakerById,
                 CancellationToken cancellationToken)
@@ -71,7 +71,7 @@ namespace GraphqlDemo.Types
             }
 
             public async Task<IEnumerable<Attendee>> GetAttendeesAsync(
-                Session session,
+                [Parent] Session session,
                 [ScopedService] ApplicationDbContext dbContext,
                 AttendeeByIdDataLoader attendeeById,
                 CancellationToken cancellationToken)
@@ -86,7 +86,7 @@ namespace GraphqlDemo.Types
             }
 
             public async Task<Track?> GetTrackAsync(
-                Session session,
+                [Parent] Session session,
                 TrackByIdDataLoader trackById,
                 CancellationToken cancellationToken)
             {
@@ -99,7 +99,7 @@ namespace GraphqlDemo.Types
             }
 
             public async Task<Conference?> GetConferenceAsync(
-                Session session,
+                [Parent] Session session,
                 ConferenceByIdDataLoader conferenceById,
                 CancellationToken cancellationToken)
             {
@@ -110,7 +110,7 @@ namespace GraphqlDemo.Types
             }
 
             public async Task<IEnumerable<Tag?>> GetTagsAsync(
-                Session session,
+                [Parent] Session session,
                 [ScopedService] ApplicationDbContext dbContext,
                 TagByIdDataLoader tagById,
                 CancellationToken cancellationToken)

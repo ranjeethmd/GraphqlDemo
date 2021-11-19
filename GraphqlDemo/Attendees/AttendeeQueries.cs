@@ -17,7 +17,7 @@ namespace GraphqlDemo.Attendees
     public class AttendeeQueries
     {
         [UseApplicationDbContext]
-        public async Task<IEnumerable<Attendee>> GetAttendeeAsync(
+        public async Task<IEnumerable<Attendee>> GetAttendeesAsync(
             [ScopedService] ApplicationDbContext context,
             CancellationToken cancellationToken) =>
             await context.Attendees.ToListAsync(cancellationToken);
