@@ -103,7 +103,10 @@ namespace GraphqlDemo.Types
                 ConferenceByIdDataLoader conferenceById,
                 CancellationToken cancellationToken)
             {
-                return await conferenceById.LoadAsync(session.ConferenceId, cancellationToken);
+                if (!session.ConferenceId.HasValue)
+                    return null;
+
+                return await conferenceById.LoadAsync(session.ConferenceId.Value, cancellationToken);
             }
 
             public async Task<IEnumerable<Tag?>> GetTagsAsync(

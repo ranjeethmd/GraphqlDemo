@@ -3,14 +3,16 @@ using System;
 using GraphqlDemo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraphqlDemo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211116033130_Refactoring")]
+    partial class Refactoring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,15 +72,20 @@ namespace GraphqlDemo.Migrations
 
             modelBuilder.Entity("GraphqlDemo.Data.ConferenceAttendee", b =>
                 {
-                    b.Property<int>("ConferenceId")
+                    b.Property<int>("ConfrenceId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("AttendeeID")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("ConferenceId", "AttendeeID");
+                    b.Property<int?>("ConferenceId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ConfrenceId", "AttendeeID");
 
                     b.HasIndex("AttendeeID");
+
+                    b.HasIndex("ConferenceId");
 
                     b.ToTable("ConferenceAttendee");
                 });
@@ -242,9 +249,7 @@ namespace GraphqlDemo.Migrations
 
                     b.HasOne("GraphqlDemo.Data.Conference", "Conference")
                         .WithMany("ConferenceAttendees")
-                        .HasForeignKey("ConferenceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ConferenceId");
 
                     b.Navigation("Attendee");
 

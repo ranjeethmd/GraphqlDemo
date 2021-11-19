@@ -58,7 +58,7 @@ namespace GraphqlDemo.Types
                 int[] conferenceIds = await dbContext.Attendees
                     .Where(a => a.Id == attendee.Id)
                     .Include(a => a.ConferenceAttendees)
-                    .SelectMany(a => a.ConferenceAttendees.Select(t => t.ConfrenceId))
+                    .SelectMany(a => a.ConferenceAttendees.Select(t => t.ConferenceId))
                     .ToArrayAsync();
 
                 return await conferenceById.LoadAsync(conferenceIds, cancellationToken);

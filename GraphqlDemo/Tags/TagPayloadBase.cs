@@ -8,12 +8,12 @@ namespace GraphqlDemo.Tags
     {
         protected TagPayloadBase(Tag payload)
         {
-            Payload = payload;
+            Tag = payload;
         }
         protected TagPayloadBase(IReadOnlyList<UserError>? errors) : base(errors)
         {
         }
 
-        public Tag? Payload { get; }
+        public Tag? Tag { get; }
     }
 }

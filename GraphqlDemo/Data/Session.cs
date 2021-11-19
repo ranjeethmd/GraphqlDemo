@@ -26,7 +26,7 @@ namespace GraphqlDemo.Data
 
         public int? TrackId { get; set; }
 
-        public int ConferenceId { get; set; }
+        public int? ConferenceId { get; set; }
 
         public ICollection<SessionSpeaker> SessionSpeakers { get; set; } =
             new List<SessionSpeaker>();

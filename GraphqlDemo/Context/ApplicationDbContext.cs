@@ -45,7 +45,7 @@ namespace GraphqlDemo
             // Many-to-many: Conference <-> Attendee
             modelBuilder
                 .Entity<ConferenceAttendee>()
-                .HasKey(ca => new { ca.ConfrenceId, ca.AttendeeID });
+                .HasKey(ca => new { ca.ConferenceId, ca.AttendeeID });
         }
 
         public DbSet<Conference> Conferences { get; set; } = default!;

@@ -3,6 +3,7 @@ using GraphqlDemo.Data;
 using GraphqlDemo.Extensions;
 using HotChocolate;
 using HotChocolate.Types;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -71,10 +72,11 @@ namespace GraphqlDemo.Attendees
                 return new RegisterAttendeePayload(
                    new UserError("Attendee not found", "NO_ATTENDEE_FOUND"));
             }
+           
 
-            attendee.ConferenceAttendees.Add(new ConferenceAttendee { 
+            attendee.ConferenceAttendees.Add(new ConferenceAttendee {   
                 AttendeeID = input.AttendeeId,
-                ConfrenceId = input.ConferenceId
+                ConferenceId = input.ConferenceId
             
             });
 

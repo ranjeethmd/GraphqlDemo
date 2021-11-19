@@ -35,6 +35,8 @@ namespace GraphqlDemo.Sessions
                 Abstract = input.Abstract,
             };
 
+            context.Sessions.Add(session);
+
             foreach (int speakerId in input.SpeakerIds)
             {
                 session.SessionSpeakers.Add(new SessionSpeaker
@@ -43,7 +45,6 @@ namespace GraphqlDemo.Sessions
                 });
             }
 
-            context.Sessions.Add(session);
             await context.SaveChangesAsync(cancellationToken);
 
             return new AddSessionPayload(session);
