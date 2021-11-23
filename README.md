@@ -12,10 +12,10 @@ This repository contains demo code for GraphQL implementation in .NET Core.
   - Mutations
   - Type Declarations
 - [x] Enable REACT Relay.
-- [ ] Enable paging.
+- [x] Implement REACT front end with Apollo client.
 - [ ] Explore security.
 - [ ] Explore ease of unit testing.
-- [ ] Implement REACT front end with Apollo client.
+- [ ] Enable paging.
 - [ ] Containarize application on K8s.
 - [ ] Add subscription for real-time notifications:tada:
 
