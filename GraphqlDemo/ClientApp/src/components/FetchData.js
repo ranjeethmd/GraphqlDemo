@@ -36,9 +36,9 @@ export const FetchData = () => {
 
     return (
         <div>
-            <p>
+            <div>
                 <pre>{JSON.stringify(data, null, 2)}</pre>
-            </p>
+            </div>
         </div>
     );
 }

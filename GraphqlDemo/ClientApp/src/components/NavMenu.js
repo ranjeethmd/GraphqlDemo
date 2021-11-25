@@ -23,7 +23,7 @@ export const NavMenu = () => {
                                 <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/update-data">Update Data</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
