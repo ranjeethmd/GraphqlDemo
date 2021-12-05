@@ -15,6 +15,7 @@ This repository contains demo code for GraphQL implementation in .NET Core.
 - [x] Implement REACT front end with Apollo client.
 - [x] Explore security.
   - Integrate REACT with Azure AD OIDC with Authroization code flow with PKCE.
+  - Add access token support to Apollo client.
 - [ ] Explore ease of unit testing.
 - [ ] Enable paging.
 - [ ] Containarize application on K8s.
