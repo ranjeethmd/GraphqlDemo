@@ -23,6 +23,6 @@ export const SignOutButton = () => {
 
 
     return (
-        <button className="btn btn-primary" onClick={() => handleLogout(instance)}>Sign out using Redirect</button>
+        <button className="btn btn-primary" onClick={() => handleLogout(instance)}>Sign out {accounts[0].name}</button>
     );
 }

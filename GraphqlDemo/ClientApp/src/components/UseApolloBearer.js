@@ -36,7 +36,7 @@ export const useApolloBearer = (url) => {
         return {
             headers: {
                 ...headers,
-                authorization: token,
+                authorization:`Bearer ${token}`,
             }
         }
     });
