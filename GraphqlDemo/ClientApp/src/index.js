@@ -11,6 +11,10 @@ import {
 
 import registerServiceWorker from './registerServiceWorker';
 
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+import { msalConfig } from "./authConfig";
+
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 
@@ -22,11 +26,17 @@ const client = new ApolloClient({
     //},
 });
 
+
+
+const msalInstance = new PublicClientApplication(msalConfig);
+
 ReactDOM.render(
     <BrowserRouter basename={baseUrl}>
+        <MsalProvider instance={msalInstance}>
         <ApolloProvider client={client}>
             <App />
-        </ApolloProvider>
+            </ApolloProvider>
+        </MsalProvider>
   </BrowserRouter>,
   rootElement);
 

@@ -14,6 +14,7 @@ export const App = () => {
             <Route exact path='/' component={Home} />
             <Route path='/update-data' component={UpdateData} />
             <Route path='/fetch-data' component={FetchData} />
+            <Route exact path='/logout' component={Home} />
         </Layout>
     );
 }
