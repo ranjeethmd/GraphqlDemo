@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery, gql } from "@apollo/client";
-import { InteractionType } from "@azure/msal-browser";
-import { MsalAuthenticationTemplate } from "@azure/msal-react";
+
 
 export const FetchData = () => {
 
@@ -30,29 +29,28 @@ export const FetchData = () => {
 
                                     }
                                 }`;
-
-    const { loading, error, data } = useQuery(CONFERENCE_QUERY);
-
+    
     let returnFragment;
+    const { loading, error, data } = useQuery(CONFERENCE_QUERY);
 
     if (loading) {
         returnFragment = <p>Loading...</p>;
     }
     else if (error) {
-        returnFragment = <p>Error : {error}</p>
+        returnFragment = <p>Error : {error}</p>;
     }
     else {
-        returnFragment =
+        returnFragment = 
             <div>
-                <div>
-                    <pre>{JSON.stringify(data, null, 2)}</pre>
-                </div>
+                <pre>{JSON.stringify(data, null, 2)}</pre>
             </div>
+        
     }
 
+   
     return (
-        <MsalAuthenticationTemplate interactionType={InteractionType.Redirect}>
+        <div>
             {returnFragment}
-        </MsalAuthenticationTemplate>
+        </div>
     );
 }
