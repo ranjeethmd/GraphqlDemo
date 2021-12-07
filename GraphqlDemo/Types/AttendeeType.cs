@@ -16,17 +16,20 @@ namespace GraphqlDemo.Types
         protected override void Configure(IObjectTypeDescriptor<Attendee> descriptor)
         {
             descriptor
+                .Authorize("CanReadGraph")
                 .ImplementsNode()
                 .IdField(t => t.Id)
                 .ResolveNode((ctx, id) => ctx.DataLoader<AttendeeByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.SessionsAttendees)
                 .ResolveWith<AttendeeResolvers>(t => t.GetSessionsAsync(default!, default!, default!, default))
                 .UseDbContext<ApplicationDbContext>()
                 .Name("sessions");
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.ConferenceAttendees)
                 .ResolveWith<AttendeeResolvers>(t => t.GetConfrencesAsync(default!, default!, default!, default))
                 .UseDbContext<ApplicationDbContext>()

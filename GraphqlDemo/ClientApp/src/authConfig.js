@@ -12,7 +12,7 @@
 
 // Add scopes here for ID token to be used at Microsoft identity platform endpoints.
 export const loginRequest = {
-    scopes: ["User.Read"]
+    scopes: ["api://80f88eed-1425-4a57-92d7-ab61b4deac75/Graph.Read"]
 };
 
 // Add the endpoints here for Microsoft Graph API services you'd like to use.

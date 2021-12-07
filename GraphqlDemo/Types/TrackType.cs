@@ -16,23 +16,27 @@ namespace GraphqlDemo.Types
         protected override void Configure(IObjectTypeDescriptor<Track> descriptor)
         {
             descriptor
+                .Authorize("CanReadGraph")
                 .ImplementsNode()
                 .IdField(t => t.Id)
                 .ResolveNode((ctx, id) =>
                     ctx.DataLoader<TrackByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.Sessions)
                 .ResolveWith<TrackResolvers>(t => t.GetSessionsAsync(default!, default!, default!, default))
                 .UseDbContext<ApplicationDbContext>()
                 .Name("sessions");
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.Conference)
                 .ResolveWith<TrackResolvers>(t => t.GetConferenceAsync(default!, default!, default))
                 .Name("conference");
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.ConferenceId)
                 .ID(nameof(Conference));
 

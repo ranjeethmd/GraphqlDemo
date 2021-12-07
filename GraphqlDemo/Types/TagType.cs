@@ -16,11 +16,13 @@ namespace GraphqlDemo.Types
         protected override void Configure(IObjectTypeDescriptor<Tag> descriptor)
         {
             descriptor
+                .Authorize("CanReadGraph")
                 .ImplementsNode()
                 .IdField(t => t.Id)
                 .ResolveNode((ctx, id) => ctx.DataLoader<TagByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.SessionTags)
                 .ResolveWith<TagResolvers>(t => t.GetSessionsAsync(default!, default!, default!, default))
                 .UseDbContext<ApplicationDbContext>()

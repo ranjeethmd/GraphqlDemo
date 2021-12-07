@@ -37,7 +37,10 @@ export const FetchData = () => {
         returnFragment = <p>Loading...</p>;
     }
     else if (error) {
-        returnFragment = <p>Error : {error}</p>;
+        returnFragment =
+            <div>
+                <pre>{JSON.stringify(error, null, 2)}</pre>
+            </div>
     }
     else {
         returnFragment = 

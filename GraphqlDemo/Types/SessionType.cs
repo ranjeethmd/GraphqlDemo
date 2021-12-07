@@ -16,38 +16,45 @@ namespace GraphqlDemo.Types
         protected override void Configure(IObjectTypeDescriptor<Session> descriptor)
         {
             descriptor
+                .Authorize("CanReadGraph")
                 .ImplementsNode()
                 .IdField(t => t.Id)
                 .ResolveNode((ctx, id) => ctx.DataLoader<SessionByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.SessionSpeakers)
                 .ResolveWith<SessionResolvers>(t => t.GetSpeakersAsync(default!, default!, default!, default))
                 .UseDbContext<ApplicationDbContext>()
                 .Name("speakers");
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.SessionAttendees)
                 .ResolveWith<SessionResolvers>(t => t.GetAttendeesAsync(default!, default!, default!, default))
                 .UseDbContext<ApplicationDbContext>()
                 .Name("attendees");
 
             descriptor
+               .Authorize("CanReadGraph")
                .Field(t => t.SessionTags)
                .ResolveWith<SessionResolvers>(t => t.GetTagsAsync(default!, default!, default!, default))
                .UseDbContext<ApplicationDbContext>()
                .Name("tags");
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.Track)
                 .ResolveWith<SessionResolvers>(t => t.GetTrackAsync(default!, default!, default))
                 .Name("track");
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.TrackId)
                 .ID(nameof(Track));
 
             descriptor
+                .Authorize("CanReadGraph")
                 .Field(t => t.Conference)
                 .ResolveWith<SessionResolvers>(t => t.GetConferenceAsync(default!, default!, default))
                 .Name("conference");           
