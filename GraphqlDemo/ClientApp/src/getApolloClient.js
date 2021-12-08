@@ -27,20 +27,17 @@ export const getApolloClient = (url, instance) => {
     if (accounts.length > 0) {
         instance.setActiveAccount(accounts[0]);
     }
-
-    instance.addEventCallback((event) => {
-        if (event.eventType === EventType.LOGIN_SUCCESS && event.payload.account) {
-            const account = event.payload.account;
-            instance.setActiveAccount(account);
-        }
-    }, error => {
-        console.log('error', error);
-    });
-
+   
 
     const getAccessToken = async () => {
 
         await instance.handleRedirectPromise();
+
+        const accounts = instance.getAllAccounts();
+
+        if (accounts.length > 0) {
+            instance.setActiveAccount(accounts[0]);
+        }
 
         try {
             let response = await instance.acquireTokenSilent(request);
