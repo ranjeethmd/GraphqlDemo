@@ -1,5 +1,6 @@
 using GraphqlDemo.Attendees;
 using GraphqlDemo.Conferences;
+using GraphqlDemo.Extensions;
 using GraphqlDemo.Sessions;
 using GraphqlDemo.Tags;
 using GraphqlDemo.Tracks;
@@ -28,16 +29,21 @@ namespace GraphqlDemo
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services )
+        public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
 
-            services.AddAuthorization(options => options.AddPolicy("CanReadGraph", policy => policy.RequireAssertion(context => 
-                context.User.HasClaim(c => c.Type == "http://schemas.microsoft.com/identity/claims/scope" && c.Value == "Graph.Read")
-            
-            )));
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("CanReadGraph", policy => policy.RequireAssertion(context =>
+                    context.User.HasClaim(c => c.Type == "http://schemas.microsoft.com/identity/claims/scope" && c.Value == "Graph.Read")));
+
+                options.AddPolicy("CanWriteGraph", policy => policy.RequireAssertion(context =>
+                  context.User.HasClaim(c => c.Type == "http://schemas.microsoft.com/identity/claims/scope" && c.Value == "Graph.Write")));
+
+            });
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -61,13 +67,13 @@ namespace GraphqlDemo
                     .AddTypeExtension<TrackMutations>()
                     .AddTypeExtension<ConferenceMutations>()
                     .AddTypeExtension<TagMutations>()
-                    .AddTypeExtension<AttendeeMutations>()               
+                    .AddTypeExtension<AttendeeMutations>()
                 .AddType<AttendeeType>()
                 .AddType<SessionType>()
                 .AddType<SpeakerType>()
                 .AddType<TrackType>()
                 .AddType<ConferenceType>()
-                .AddType<TagType>();    
+                .AddType<TagType>();
 
 
             services.AddPooledDbContextFactory<ApplicationDbContext>(options => options.UseSqlite("Data Source=conferences.db"));
@@ -79,7 +85,7 @@ namespace GraphqlDemo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
+
 
             if (env.IsDevelopment())
             {
@@ -90,20 +96,23 @@ namespace GraphqlDemo
                 app.UseHsts();
             }
 
-            
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();    
+            app.UseSpaStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthentication();
+
+            app.SplitClaims("http://schemas.microsoft.com/identity/claims/scope");
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {    
-                endpoints.MapGraphQL();               
+            {
+                endpoints.MapGraphQL();
             });
 
             app.UseSpa(spa =>

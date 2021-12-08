@@ -1,6 +1,7 @@
 ﻿using GraphqlDemo.Data;
 using GraphqlDemo.Extensions;
 using HotChocolate;
+using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Types;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 namespace GraphqlDemo.Tracks
 {
     [ExtendObjectType("Mutation")]
+    [Authorize(Policy = "CanWriteGraph")]
     public class TrackMutations
     {
         [UseApplicationDbContext]

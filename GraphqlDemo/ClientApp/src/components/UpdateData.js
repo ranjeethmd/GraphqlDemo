@@ -21,10 +21,22 @@ export const UpdateData = () => {
     const [createConference, { data, loading, error }] = useMutation(CREATE_CONFERENCE);
 
     if (loading) return <div>Submitting...</div>;
-    if (error) return <div>`Submission error! ${error.message}`</div>;
 
-    const createNewConference = () => {
-        createConference({ variables: { name: `Apollo Conference ${Math.floor(Math.random() * 10000)}` } });
+    else if (error) {
+        return (
+            <div>
+                <pre>{JSON.stringify(error, null, 2)}</pre>
+            </div>
+        );
+    }
+
+    const createNewConference = async () => {
+        try {
+            await createConference({ variables: { name: `Apollo Conference ${Math.floor(Math.random() * 10000)}` } });
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 
     return (
