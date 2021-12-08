@@ -16,23 +16,17 @@ namespace GraphqlDemo.Extensions
 
                 var claim = context.User.Claims.FirstOrDefault(c => c.Type == type);
 
-                if(claim != null)
+                var claims = claim?.Value?.Split(' ', StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
+
+                if (claims.Length > 1)
                 {
-                    var claims = claim.Value?.Split(' ', StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
 
-                    if(claims.Length > 1)
+                    if (context.User.Identity is ClaimsIdentity identity)
                     {
-                        var identity = context.User.Identity as ClaimsIdentity;
+                        identity.RemoveClaim(claim);
 
-                        if (identity != null)
-                        {
-                            identity.RemoveClaim(claim);
-
-                            identity.AddClaims(claims.Select(c => new Claim(type, c)));
-                        }
+                        identity.AddClaims(claims.Select(c => new Claim(type, c)));
                     }
-
-                    Console.WriteLine(claim.Value);
                 }
 
                 await next.Invoke();
