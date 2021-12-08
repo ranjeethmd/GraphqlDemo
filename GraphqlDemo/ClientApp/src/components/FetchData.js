@@ -29,31 +29,24 @@ export const FetchData = () => {
 
                                     }
                                 }`;
-    
-    let returnFragment;
+
     const { loading, error, data } = useQuery(CONFERENCE_QUERY);
 
     if (loading) {
-        returnFragment = <p>Loading...</p>;
+        return <p>Loading...</p>;
     }
+
     else if (error) {
-        returnFragment =
+        return (
             <div>
                 <pre>{JSON.stringify(error, null, 2)}</pre>
             </div>
-    }
-    else {
-        returnFragment = 
-            <div>
-                <pre>{JSON.stringify(data, null, 2)}</pre>
-            </div>
-        
+        );
     }
 
-   
     return (
         <div>
-            {returnFragment}
+            <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
     );
 }
