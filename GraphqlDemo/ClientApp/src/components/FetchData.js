@@ -1,5 +1,6 @@
 import React from 'react';
-import {useQuery, gql } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
+
 
 export const FetchData = () => {
 
@@ -31,14 +32,21 @@ export const FetchData = () => {
 
     const { loading, error, data } = useQuery(CONFERENCE_QUERY);
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error : { error }</p>;
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    else if (error) {
+        return (
+            <div>
+                <pre>{JSON.stringify(error, null, 2)}</pre>
+            </div>
+        );
+    }
 
     return (
         <div>
-            <div>
-                <pre>{JSON.stringify(data, null, 2)}</pre>
-            </div>
+            <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
     );
 }

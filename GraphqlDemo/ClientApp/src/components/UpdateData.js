@@ -1,5 +1,7 @@
 import React from 'react';
 import { useMutation, gql } from "@apollo/client";
+import { InteractionType } from "@azure/msal-browser";
+import { MsalAuthenticationTemplate } from "@azure/msal-react";
 
 export const UpdateData = () => {
 
@@ -26,14 +28,17 @@ export const UpdateData = () => {
     }
 
     return (
-        <div>
-            
+        <MsalAuthenticationTemplate interactionType={InteractionType.Redirect}>
+            <div>
 
-            <div><pre>{JSON.stringify(data, null, 2)}</pre></div>
 
-           
+                <div><pre>{JSON.stringify(data, null, 2)}</pre></div>
 
-            <button className="btn btn-primary" onClick={createNewConference}>Create</button>
-        </div>
+
+
+                <button className="btn btn-primary" onClick={createNewConference}>Create</button>
+            </div>
+        </MsalAuthenticationTemplate>
+
     );
 }
