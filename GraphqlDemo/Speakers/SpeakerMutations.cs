@@ -2,6 +2,7 @@
 using GraphqlDemo.Extensions;
 using GraphqlDemo.Records;
 using HotChocolate;
+using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Types;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace GraphqlDemo
 {
     [ExtendObjectType("Mutation")]
+    [Authorize(Policy = "CanWriteGraph")]
     public class SpeakerMutations
     {
         [UseApplicationDbContext]

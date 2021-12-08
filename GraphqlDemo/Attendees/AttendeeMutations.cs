@@ -2,6 +2,7 @@
 using GraphqlDemo.Data;
 using GraphqlDemo.Extensions;
 using HotChocolate;
+using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Types;
 using System.Linq;
 using System.Threading;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace GraphqlDemo.Attendees
 {
     [ExtendObjectType("Mutation")]
+    [Authorize(Policy = "CanWriteGraph")]
     public class AttendeeMutations
     {
         [UseApplicationDbContext]

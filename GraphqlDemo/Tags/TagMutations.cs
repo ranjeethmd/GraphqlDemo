@@ -3,6 +3,7 @@ using GraphqlDemo.Conferences;
 using GraphqlDemo.Data;
 using GraphqlDemo.Extensions;
 using HotChocolate;
+using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Types;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace GraphqlDemo.Tags
 {
     [ExtendObjectType("Mutation")]
+    [Authorize(Policy = "CanWriteGraph")]
     public class TagMutations
     {
         [UseApplicationDbContext]
