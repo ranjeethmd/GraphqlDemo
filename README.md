@@ -18,8 +18,8 @@ This repository contains demo code for GraphQL implementation in .NET Core.
   - Add access token support to Apollo client.
   - Add scope support to GraphQL server for Authoriazation
   - Implement code first Policy based Authorization on GraphQL type
-- [ ] Explore ease of unit testing.
 - [ ] Enable paging.
+- [ ] Explore ease of unit testing.
 - [ ] Containarize application on K8s.
 - [ ] Add subscription for real-time notifications:tada:
 

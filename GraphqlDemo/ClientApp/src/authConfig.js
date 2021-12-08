@@ -14,8 +14,3 @@
 export const loginRequest = {
     scopes: ["api://80f88eed-1425-4a57-92d7-ab61b4deac75/Graph.Read"]
 };
-
-// Add the endpoints here for Microsoft Graph API services you'd like to use.
-export const graphConfig = {
-    graphMeEndpoint: "https://graph.microsoft.com/v1.0/me"
-};
