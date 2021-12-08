@@ -4,7 +4,6 @@ using GraphqlDemo.Extensions;
 using HotChocolate;
 using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Types;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -66,7 +65,7 @@ namespace GraphqlDemo.Attendees
         RegisterAttendeeInput input,
         [ScopedService] ApplicationDbContext context)
         {
-            
+
             var attendee = await context.Attendees.FindAsync(input.AttendeeId);
 
             if (attendee == null)
@@ -74,12 +73,13 @@ namespace GraphqlDemo.Attendees
                 return new RegisterAttendeePayload(
                    new UserError("Attendee not found", "NO_ATTENDEE_FOUND"));
             }
-           
 
-            attendee.ConferenceAttendees.Add(new ConferenceAttendee {   
+
+            attendee.ConferenceAttendees.Add(new ConferenceAttendee
+            {
                 AttendeeID = input.AttendeeId,
                 ConferenceId = input.ConferenceId
-            
+
             });
 
             foreach (var sessionId in input.SessionIds)

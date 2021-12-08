@@ -20,7 +20,7 @@ namespace GraphqlDemo
             context.Speakers.ToListAsync();
 
         [UseApplicationDbContext]
-        public Task<Speaker> GetSpeakerByNameAsync(string name,[ScopedService] ApplicationDbContext context) =>
+        public Task<Speaker> GetSpeakerByNameAsync(string name, [ScopedService] ApplicationDbContext context) =>
             context.Speakers.FirstAsync(s => s.Name == name);
 
         [UseApplicationDbContext]

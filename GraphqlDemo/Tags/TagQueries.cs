@@ -52,9 +52,9 @@ namespace GraphqlDemo.Tags
         {
             return await context.Tags
             .Where(t => names.Contains(t.Name))
-            .ToArrayAsync();          
+            .ToArrayAsync();
 
-        }           
+        }
 
     }
 }

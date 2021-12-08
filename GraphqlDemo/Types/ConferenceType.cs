@@ -53,7 +53,7 @@ namespace GraphqlDemo.Types
         private class ConfrenceResolvers
         {
             public async Task<IEnumerable<Session?>?> GetSessionsAsync(
-                [Parent]Conference confrence,
+                [Parent] Conference confrence,
                 [ScopedService] ApplicationDbContext dbContext,
                 SessionByIdDataLoader sessionById,
                 CancellationToken cancellationToken)
@@ -67,7 +67,7 @@ namespace GraphqlDemo.Types
             }
 
             public async Task<IEnumerable<Track?>?> GetTracksAsync(
-                [Parent]Conference confrence,
+                [Parent] Conference confrence,
                 [ScopedService] ApplicationDbContext dbContext,
                 TrackByIdDataLoader trackById,
                 CancellationToken cancellationToken)

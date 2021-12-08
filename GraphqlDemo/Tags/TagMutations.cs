@@ -1,5 +1,4 @@
 ﻿using GraphqlDemo.Common;
-using GraphqlDemo.Conferences;
 using GraphqlDemo.Data;
 using GraphqlDemo.Extensions;
 using HotChocolate;
@@ -16,7 +15,7 @@ namespace GraphqlDemo.Tags
     {
         [UseApplicationDbContext]
         public async Task<CreateTagPayload> CreateTagAsync(
-           CreateTagInput  input,
+           CreateTagInput input,
            [ScopedService] ApplicationDbContext context,
            CancellationToken cancellationToken)
         {
@@ -46,15 +45,16 @@ namespace GraphqlDemo.Tags
         {
             var tag = await context.Tags.FindAsync(input.Id);
 
-            foreach(int sessionId in input.SessionIds)
+            foreach (int sessionId in input.SessionIds)
             {
-                tag.SessionTags.Add(new SessionTag { 
-                    TagId=input.Id,
+                tag.SessionTags.Add(new SessionTag
+                {
+                    TagId = input.Id,
                     SessionId = sessionId
                 });
-            }           
+            }
 
-          
+
             await context.SaveChangesAsync(cancellationToken);
 
             return new CreateTagPayload(tag);
