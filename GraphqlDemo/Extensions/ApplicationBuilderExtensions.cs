@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GraphqlDemo.Extensions
 {
+    /// <summary>
+    /// Middleware written to split claims if they exists
+    /// </summary>
     public static class ApplicationBuilderExtensions
     {
         public static void SplitClaims(this IApplicationBuilder app, string type)
