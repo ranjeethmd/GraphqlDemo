@@ -22,11 +22,6 @@ export const getApolloClient = (url, instance) => {
         ...loginRequest,
         account: accounts[0]
     };
-
-
-    if (accounts.length > 0) {
-        instance.setActiveAccount(accounts[0]);
-    }
    
 
     const getAccessToken = async () => {
