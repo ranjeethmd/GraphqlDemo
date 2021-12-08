@@ -3,10 +3,10 @@ using HotChocolate.Types.Relay;
 
 namespace GraphqlDemo.Tracks
 {
-    public class RenameTrackInput 
+    public class RenameTrackInput
     {
-        [ID(nameof(Track))] 
-        public int Id { get; set; } = default!; 
-        public string Name { get; set; } = default!; 
+        [ID(nameof(Track))]
+        public int Id { get; set; } = default!;
+        public string Name { get; set; } = default!;
     }
 }

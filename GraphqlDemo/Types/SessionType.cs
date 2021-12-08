@@ -57,7 +57,7 @@ namespace GraphqlDemo.Types
                 .Authorize("CanReadGraph")
                 .Field(t => t.Conference)
                 .ResolveWith<SessionResolvers>(t => t.GetConferenceAsync(default!, default!, default))
-                .Name("conference");           
+                .Name("conference");
         }
 
         private class SessionResolvers

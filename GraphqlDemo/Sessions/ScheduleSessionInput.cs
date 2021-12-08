@@ -7,7 +7,7 @@ namespace GraphqlDemo.Sessions
     public record ScheduleSessionInput
     {
         [ID(nameof(Session))]
-        public int SessionId{get; set;} = default!;
+        public int SessionId { get; set; } = default!;
         [ID(nameof(Track))]
         public int TrackId { get; set; } = default!;
         [ID(nameof(Conference))]

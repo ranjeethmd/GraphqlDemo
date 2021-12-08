@@ -1,6 +1,5 @@
 import { setContext } from '@apollo/client/link/context';
 import { loginRequest } from "./authConfig";
-import { EventType } from '@azure/msal-browser';
 
 import {
     ApolloClient,

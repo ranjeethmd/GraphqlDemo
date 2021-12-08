@@ -51,7 +51,7 @@ namespace GraphqlDemo.Attendees
         {
             return await context.Attendees
             .Where(t => names.Contains(t.UserName))
-            .ToArrayAsync();          
+            .ToArrayAsync();
 
         }
     }
