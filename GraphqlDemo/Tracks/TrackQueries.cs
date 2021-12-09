@@ -16,14 +16,7 @@ namespace GraphqlDemo.Tracks
     [ExtendObjectType("Query")]
     public class TrackQueries
     {
-        [UseApplicationDbContext]
-        //[UseApplicationDbContext]
-        //[UsePaging]
-        //public IQueryable<Track> GetTracks(
-        //[ScopedService] ApplicationDbContext context) =>
-        //context.Tracks.OrderBy(t => t.Name);
-
-
+        [UseApplicationDbContext]        
         public async Task<IEnumerable<Track>> GetTracksAsync(
            [ScopedService] ApplicationDbContext context,
            CancellationToken cancellationToken) =>
