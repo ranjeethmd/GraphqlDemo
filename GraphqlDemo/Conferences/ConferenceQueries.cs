@@ -16,6 +16,7 @@ namespace GraphqlDemo.Conferences
     public class ConferenceQueries
     {
         [UseApplicationDbContext]
+        [UseOffsetPaging(MaxPageSize = 25)]
         public async Task<IEnumerable<Conference>> GetConferencesAsync(
             [ScopedService] ApplicationDbContext context,
             CancellationToken cancellationToken) =>
