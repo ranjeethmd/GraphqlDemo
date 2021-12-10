@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery, gql, useLazyQuery } from "@apollo/client";
 
 
-export const FetchData = () => {
+export default function FetchData() {
 
     const CONFERENCE_QUERY = gql`
                                 query{

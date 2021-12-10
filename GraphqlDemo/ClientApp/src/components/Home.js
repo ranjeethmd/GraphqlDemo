@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Home = () => {
+export default function Home() {
     return (
         <div>
             <h1>Hello, world!</h1>
