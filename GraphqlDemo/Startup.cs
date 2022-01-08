@@ -52,7 +52,7 @@ namespace GraphqlDemo
 
             services
                 .AddGraphQLServer()
-                .AddAuthorization()
+                //.AddAuthorization()
                 .AddGlobalObjectIdentification()
                 .AddQueryType(d => d.Name("Query"))
                 .AddTypeExtension<SessionQueries>()
@@ -108,7 +108,7 @@ namespace GraphqlDemo
 
             app.SplitClaims("http://schemas.microsoft.com/identity/claims/scope");
 
-            app.UseAuthorization();
+          //  app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

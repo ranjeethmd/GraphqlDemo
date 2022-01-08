@@ -9,7 +9,7 @@ const UpdateData = React.lazy(() => import('./components/UpdateData'));
 const FetchData = React.lazy(() => import('./components/FetchData'));
 
 
-export const App = () => {
+export const App = () => {  
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
