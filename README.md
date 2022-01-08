@@ -20,8 +20,10 @@ This repository contains demo code for GraphQL implementation in .NET Core.
   - Implement code first Policy based Authorization on GraphQL type
 - [x] Enable paging.
 - [x] lazy loading.
-  - npm install --save-dev jest
-  - npm install --save-dev enzyme enzyme-adapter-react-16 enzyme-to-json
+  - npm install --save-dev react-scripts@latest
+  - npm install --save-dev jest@27.4.7
+  - npm install --save-dev @testing-library/jest-dom@latest
+  - npm install --save-dev @testing-library/react
 - [x] Explore ease of unit testing.
 - [ ] Containarize application on K8s.
 - [ ] Add subscription for real-time notifications:tada:
