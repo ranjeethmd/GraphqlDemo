@@ -1,10 +1,7 @@
 import React from 'react';
 import { useQuery, gql, useLazyQuery } from "@apollo/client";
 
-
-export default function FetchData() {
-
-    const CONFERENCE_QUERY = gql`
+export const CONFERENCE_QUERY = gql`
                                 query{
                                     conferenceById(id:"Q29uZmVyZW5jZQppMQ==")
                                     {
@@ -29,6 +26,10 @@ export default function FetchData() {
 
                                     }
                                 }`;
+
+export default function FetchData() {
+
+    
 
     const PAGE_QUERY = gql`
         query Conferences($skip:Int, $take:Int){
@@ -87,3 +88,4 @@ export default function FetchData() {
 
     
 }
+
