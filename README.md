@@ -22,7 +22,7 @@ This repository contains demo code for GraphQL implementation in .NET Core.
 - [x] lazy loading.
   - npm install --save-dev jest
   - npm install --save-dev enzyme enzyme-adapter-react-16 enzyme-to-json
-- [ ] Explore ease of unit testing.
+- [x] Explore ease of unit testing.
 - [ ] Containarize application on K8s.
 - [ ] Add subscription for real-time notifications:tada:
 
