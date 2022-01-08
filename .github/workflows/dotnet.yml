@@ -24,6 +24,6 @@ jobs:
     - name: .NET unit test for GraphQL
       run: dotnet test --no-build --verbosity normal
     - name: JEST unit test for REACT
-      working-directory: ./GraphqlDemo/ClientApp
+      working-directory: ./GraphQLServer/ClientApp
       run: npm test
       
