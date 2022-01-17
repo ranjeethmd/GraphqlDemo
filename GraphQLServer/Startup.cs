@@ -52,7 +52,7 @@ namespace GraphqlDemo
 
             services
                 .AddGraphQLServer()
-                //.AddAuthorization()
+                .AddAuthorization()
                 .AddGlobalObjectIdentification()
                 .AddQueryType(d => d.Name("Query"))
                 .AddTypeExtension<SessionQueries>()
