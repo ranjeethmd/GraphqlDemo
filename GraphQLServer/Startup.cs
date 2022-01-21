@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
 
+
 namespace GraphqlDemo
 {
     public class Startup
@@ -52,6 +53,7 @@ namespace GraphqlDemo
 
             services
                 .AddGraphQLServer()
+                .InitializeOnStartup()
                 .AddAuthorization()
                 .AddGlobalObjectIdentification()
                 .AddQueryType(d => d.Name("Query"))
@@ -96,8 +98,6 @@ namespace GraphqlDemo
                 app.UseHsts();
             }
 
-
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
@@ -108,7 +108,7 @@ namespace GraphqlDemo
 
             app.SplitClaims("http://schemas.microsoft.com/identity/claims/scope");
 
-          //  app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
