@@ -27,7 +27,7 @@ export const CONFERENCE_QUERY = gql`
                                     }
                                 }`;
 
-export default function FetchData() {
+export const FetchData = () => {
 
     
 

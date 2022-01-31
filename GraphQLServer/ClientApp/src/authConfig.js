@@ -2,7 +2,8 @@
     auth: {
         clientId: "80f88eed-1425-4a57-92d7-ab61b4deac75",
         authority: "https://login.microsoftonline.com/36ae20d2-bdd1-4754-96e3-c88bfa008266", // This is a URL (e.g. https://login.microsoftonline.com/{your tenant ID})
-        redirectUri: (document.getElementsByTagName('base')[0] || {}).getAttribute('href') || window.location.origin
+        //redirectUri: window.origin;
+        navigateToLoginRequestUrl: false
     },
     cache: {
         cacheLocation: "sessionStorage", // This configures where your cache will be stored

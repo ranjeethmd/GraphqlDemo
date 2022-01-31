@@ -82,12 +82,17 @@ namespace GraphqlDemo
 
             services.AddLogging();
 
+            services.AddCors();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
+
+            app.UseCors(builder => builder.AllowAnyOrigin()
+            .AllowAnyHeader());
 
             if (env.IsDevelopment())
             {
@@ -99,7 +104,16 @@ namespace GraphqlDemo
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = context =>
+                {
+                    context.Context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                    context.Context.Response.Headers.Add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                }
+            });
+
             app.UseSpaStaticFiles();
 
             app.UseRouting();

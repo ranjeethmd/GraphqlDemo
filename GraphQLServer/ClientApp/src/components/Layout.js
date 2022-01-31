@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
 
-export default function Layout ({ children }){
+export const Layout =  ({ children }) => {
     return (
         <div>
             <NavMenu />

@@ -3,7 +3,7 @@ import { useMutation, gql } from "@apollo/client";
 import { InteractionType } from "@azure/msal-browser";
 import { MsalAuthenticationTemplate } from "@azure/msal-react";
 
-export default function UpdateData(){
+export const UpdateData = () => {
 
     const CREATE_CONFERENCE = gql`
                                 mutation CreateConference($name:String!){

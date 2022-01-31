@@ -1,20 +1,20 @@
-﻿import React from "react";
-import { useMsal } from "@azure/msal-react";
-import { loginRequest } from "../authConfig";
+﻿import React  from "react";
+import { useHistory, useLocation } from 'react-router-dom';
 
-function handleLogin(instance) {
-    instance.loginRedirect(loginRequest).catch(e => {
-        console.error(e);
-    });
-}
 
 /**
  * Renders a button which, when selected, will redirect the page to the login prompt
  */
 export const SignInButton = () => {
-    const { instance } = useMsal();
+    const history = useHistory();
+    const location = useLocation();
+
+
+    const handleLogin = () => {
+        history.push(`/signin?redirect=${location.pathname}`);
+    }
 
     return (
-        <button className="btn btn-primary"  onClick={() => handleLogin(instance)}>Sign in</button>
+        <button className="btn btn-primary"  onClick={() => handleLogin()}>Sign in</button>
     );
 }
